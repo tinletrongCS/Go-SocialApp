@@ -1,6 +1,6 @@
 # 🐢 Tho-ret-Ci-ty
 
-> A modern, high-performance Full-stack social network platform built for the Gophers community.
+> A modern, high-performance Full-stack social network platform built for the SuperIdols community.
 
 ![Go Version](https://img.shields.io/badge/Go-1.22-00ADD8?style=for-the-badge&logo=go)
 ![React Version](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react)
