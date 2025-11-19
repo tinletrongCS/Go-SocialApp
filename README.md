@@ -10,32 +10,32 @@
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker)
 ![Swagger](https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=swagger)
 
-## 📖 Introduction
+## 📖Introduction
 
 **Tho-ret-Ci-ty** is an open-source project simulating the core features of a social network. The project is designed with a Layered Architecture, focusing on clarity, scalability, and performance. It demonstrates modern Backend techniques such as Database Transactions, Caching, Rate Limiting, and Asynchronous Processing.
 
-## ✨ Features
+## Features
 
-* **🔐 Authentication & Authorization:**
+* ** Authentication & Authorization:**
     * Registration/Login with JWT (JSON Web Token).
     * Account activation via Email (Mailtrap/SendGrid integration).
     * Role-based Access Control (User, Moderator, Admin).
-* **📝 Post Management:**
+* ** Post Management:**
     * CRUD operations for posts with Tags.
     * Supports Optimistic Locking (Versioning) on updates to prevent data conflicts.
-* **💬 Social Interaction:**
+* ** Social Interaction:**
     * Comment system.
     * Follow and Unfollow users.
     * *(Coming Soon)* Like posts.
-* **📰 News Feed:**
+* ** News Feed:**
     * Aggregated feed of posts from followed users.
     * Supports Pagination, Search, and Filtering by Tags.
-* **🛡️ Security & Performance:**
+* ** Security & Performance:**
     * Rate Limiting to prevent abuse/spam.
     * Redis Caching for user information to reduce Database load.
     * Graceful Shutdown.
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 ### Backend (API)
 * **Language:** Go 1.22+
@@ -59,7 +59,7 @@
 
 ---
 
-## 🚀 Installation & Setup Guide
+##  Installation & Setup Guide
 
 ### 1. Prerequisites
 Ensure your machine has the following installed:
