@@ -138,7 +138,7 @@ func (app *application) unfollowUserHandler(w http.ResponseWriter, r *http.Reque
 func (app *application) activateUserHandler(w http.ResponseWriter, r *http.Request) {
 	token := chi.URLParam(r, "token")
 
-	err := app.store.Users.Activate(r.Context(), token)
+	err := app.store.Users.Activate(r.Context(), token) // -> call  to store/users.go
 	if err != nil {
 		switch err {
 		case store.ErrNotFound:

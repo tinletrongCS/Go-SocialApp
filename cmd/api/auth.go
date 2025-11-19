@@ -4,6 +4,7 @@ import (
 	"crypto/sha256"
 	"encoding/hex"
 	"fmt"
+	"log"
 	"net/http"
 	"time"
 
@@ -74,8 +75,10 @@ func (app *application) registerUserHandler(w http.ResponseWriter, r *http.Reque
 	if err != nil {
 		switch err {
 		case store.ErrDuplicateEmail:
+			log.Printf("----------debug log: duplicate email")
 			app.badRequestResponse(w, r, err)
 		case store.ErrDuplicateUsername:
+			log.Printf("----------debug log: duplicate username")
 			app.badRequestResponse(w, r, err)
 		default:
 			app.internalServerError(w, r, err)
@@ -160,6 +163,7 @@ func (app *application) createTokenHandler(w http.ResponseWriter, r *http.Reques
 		return
 	}
 
+	// Sau khi đăng nhập kí sẽ lấy token để đăng nhập 
 	if err := user.Password.Compare(payload.Password); err != nil {
 		app.unauthorizedErrorResponse(w, r, err)
 		return

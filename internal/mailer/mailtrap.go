@@ -11,20 +11,23 @@ import (
 
 type mailtrapClient struct {
 	fromEmail string
-	apiKey    string
+	username string
+	password string
 }
 
-func NewMailTrapClient(apiKey, fromEmail string) (mailtrapClient, error) {
-	if apiKey == "" {
-		return mailtrapClient{}, errors.New("api key is required")
+func NewMailTrapClient(in_username string, in_password string, in_fromEmail string) (mailtrapClient, error) {
+	if in_username == "" || in_password == "" {
+		return mailtrapClient{}, errors.New("mat khau hoac ten nguoi dung khong duoc de trong")
 	}
 	
 	return mailtrapClient{
-		fromEmail: fromEmail,
-		apiKey:    apiKey,
+		fromEmail: in_fromEmail,
+		username: in_username,
+		password: in_password,
 	}, nil
 }
 
+// Sửa hàm này: Kết nối tới sandbox thay vì dùng live API 
 func (m mailtrapClient) Send(templateFile, username, email string, data any, isSandbox bool) (int, error) {
 	// Template parsing and building
 	tmpl, err := template.ParseFS(FS, "templates/"+templateFile)
@@ -51,7 +54,9 @@ func (m mailtrapClient) Send(templateFile, username, email string, data any, isS
 
 	message.AddAlternative("text/html", body.String())
 
-	dialer := gomail.NewDialer("live.smtp.mailtrap.io", 587, "api", m.apiKey)
+
+	// Fix here 
+	dialer := gomail.NewDialer("sandbox.smtp.mailtrap.io", 587, m.username, m.password)
 
 	if err := dialer.DialAndSend(message); err != nil {
 		return -1, err

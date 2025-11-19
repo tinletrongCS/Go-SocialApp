@@ -97,13 +97,13 @@ func main() {
 	}
 
 	defer db.Close()
-	logger.Info("database connection pool established")
+	logger.Info("[TIN] database connected...")
 
 	// Cache
 	var rdb *redis.Client
 	if cfg.redisCfg.enabled {
 		rdb = cache.NewRedisClient(cfg.redisCfg.addr, cfg.redisCfg.pw, cfg.redisCfg.db)
-		logger.Info("redis cache connection established")
+		logger.Info("[TIN] redis cache connection established")
 
 		defer rdb.Close()
 	}
@@ -116,7 +116,11 @@ func main() {
 
 	// Mailer
 	// mailer := mailer.NewSendgrid(cfg.mail.sendGrid.apiKey, cfg.mail.fromEmail)
-	mailtrap, err := mailer.NewMailTrapClient(cfg.mail.mailTrap.apiKey, cfg.mail.fromEmail)
+	mailtrap, err := mailer.NewMailTrapClient(
+		env.GetString("MAILTRAP_USER", "42a6d547138ded"),
+		env.GetString("MAILTRAP_PASS", "60566ea52a3a48"),
+		cfg.mail.fromEmail,
+	)
 	if err != nil {
 		logger.Fatal(err)
 	}

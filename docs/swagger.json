@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "API for GopherSocial, a social network for gohpers",
+        "description": "API for GopherSocial, a social network for gophers",
         "title": "GopherSocial API",
         "termsOfService": "http://swagger.io/terms/",
         "contact": {

@@ -4,6 +4,7 @@ import (
 	"net/http"
 )
 
+// 500 
 func (app *application) internalServerError(w http.ResponseWriter, r *http.Request, err error) {
 	app.logger.Errorw("internal error", "method", r.Method, "path", r.URL.Path, "error", err.Error())
 
@@ -16,6 +17,7 @@ func (app *application) forbiddenResponse(w http.ResponseWriter, r *http.Request
 	writeJSONError(w, http.StatusForbidden, "forbidden")
 }
 
+// 400
 func (app *application) badRequestResponse(w http.ResponseWriter, r *http.Request, err error) {
 	app.logger.Warnf("bad request", "method", r.Method, "path", r.URL.Path, "error", err.Error())
 
