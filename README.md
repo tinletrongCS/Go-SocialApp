@@ -10,7 +10,7 @@
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker)
 ![Swagger](https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=swagger)
 
-## 📖Introduction
+## Introduction
 
 **Tho-ret-Ci-ty** is an open-source project simulating the core features of a social network. The project is designed with a Layered Architecture, focusing on clarity, scalability, and performance. It demonstrates modern Backend techniques such as Database Transactions, Caching, Rate Limiting, and Asynchronous Processing.
 
