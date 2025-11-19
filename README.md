@@ -34,7 +34,91 @@
    * Rate Limiting to prevent abuse/spam.
    * Redis Caching for user information to reduce Database load.
    * Graceful Shutdown.
+---
+## Project Structure
+```
+.
+├── CHANGELOG.md
+├── Dockerfile
+├── Makefile
+├── README.md
+├── cmd
+│   ├── api
+│   │   ├── api.go
+│   │   ├── api_test.go
+│   │   ├── auth.go
+│   │   ├── errors.go
+│   │   ├── feed.go
+│   │   ├── health.go
+│   │   ├── json.go
+│   │   ├── main.go
+│   │   ├── middleware.go
+│   │   ├── posts.go
+│   │   ├── test_utils.go
+│   │   ├── users.go
+│   │   └── users_test.go
+│   └── migrate
+│       ├── migrations
+│       └── seed
+├── docker-compose.yml
+├── docs
+│   ├── docs.go
+│   ├── swagger.json
+│   └── swagger.yaml
+├── go.mod
+├── go.sum
+├── internal
+│   ├── auth
+│   │   ├── auth.go
+│   │   ├── jwt.go
+│   │   └── mocks.go
+│   ├── db
+│   │   ├── db.go
+│   │   └── seed.go
+│   ├── env
+│   │   └── env.go
+│   ├── mailer
+│   │   ├── mailer.go
+│   │   ├── mailtrap.go
+│   │   ├── sendgrid.go
+│   │   └── templates
+│   ├── ratelimiter
+│   │   ├── fixed-window.go
+│   │   └── ratelimiter.go
+│   └── store
+│       ├── cache
+│       ├── comments.go
+│       ├── followers.go
+│       ├── mocks.go
+│       ├── pagination.go
+│       ├── posts.go
+│       ├── roles.go
+│       ├── storage.go
+│       └── users.go
+├── scripts
+│   ├── db_init.sql
+│   └── test_concurrency.go
+└── web
+    ├── README.md
+    ├── eslint.config.js
+    ├── index.html
+    ├── package-lock.json
+    ├── package.json
+    ├── src
+    │   ├── App.css
+    │   ├── App.tsx
+    │   ├── ConfirmationPage.tsx
+    │   ├── index.css
+    │   ├── main.tsx
+    │   └── vite-env.d.ts
+    ├── tsconfig.app.json
+    ├── tsconfig.json
+    ├── tsconfig.node.json
+    └── vite.config.ts
 
+```
+
+---
 ##  Tech Stack
 
 ### Backend (API)
@@ -83,3 +167,4 @@ export REDIS_ENABLED=true
 export FROM_EMAIL=test@Tho-ret-Ci-ty.com
 export MAILTRAP_USER=your_mailtrap_username
 export MAILTRAP_PASS=your_mailtrap_password
+
