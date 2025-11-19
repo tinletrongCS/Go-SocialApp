@@ -12,7 +12,7 @@
 
 ## Introduction
 
-**Tho-ret-Ci-ty** is an open-source project simulating the core features of a social network. The project is designed with a Layered Architecture, focusing on clarity, scalability, and performance. It demonstrates modern Backend techniques such as Database Transactions, Caching, Rate Limiting, and Asynchronous Processing.
+**Tho-ret-Ci-ty** is my first majored project simulating the core features of a social network (get ideas from Threads). The project is designed with a Layered Architecture, focusing on clarity, scalability, and performance. It demonstrates modern Backend techniques such as Database Transactions, Caching, Rate Limiting, and Asynchronous Processing.
 
 ## Features
 
@@ -21,7 +21,7 @@
     * Account activation via Email (Mailtrap/SendGrid integration).
     * Role-based Access Control (User, Moderator, Admin).
 * ** Post Management:**
-    * CRUD operations for posts with Tags.
+    * CRUD operations for posts (text-like posts sopprted).
     * Supports Optimistic Locking (Versioning) on updates to prevent data conflicts.
 * ** Social Interaction:**
     * Comment system.
