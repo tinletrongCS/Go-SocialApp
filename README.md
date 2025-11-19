@@ -37,7 +37,6 @@
 ---
 ## Project Structure
 ```
-.
 ├── CHANGELOG.md
 ├── Dockerfile
 ├── Makefile
