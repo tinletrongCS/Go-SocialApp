@@ -165,4 +165,33 @@ export REDIS_ENABLED=true
 export FROM_EMAIL=test@Tho-ret-Ci-ty.com
 export MAILTRAP_USER=your_mailtrap_username
 export MAILTRAP_PASS=your_mailtrap_password
+```
 
+### 3. Start Infrastructure (Docker)
+Start PostgreSQL and Redis containers using Docker compose:
+```bash
+docker-compose up -d
+```
+
+### 4. Database migration and Seeding
+Initial database with sample data
+
+```bash
+make migrate-up
+make seed
+```
+
+### 5. Run Backend Server
+Start the API server. Make sure to load environment variable
+
+```bash
+source .envrc && go run ./cmd/api
+```
+Server will running at: **http://localhost:8080**
+### 6. Run Frontend Server
+Start the React application in **web** directory
+
+```bash
+npm run dev
+```
+Server will running at:**http://localhost:5173**
