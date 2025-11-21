@@ -113,13 +113,20 @@ func generateUsers(num int) []*store.User {
 	users := make([]*store.User, num)
 
 	for i := 0; i < num; i++ {
-		users[i] = &store.User{
+		user := &store.User{
 			Username: usernames[i%len(usernames)] + fmt.Sprintf("%d", i),
-			Email:    usernames[i%len(usernames)] + fmt.Sprintf("%d", i) + "@example.com",
+			Email:    usernames[i%len(usernames)] + fmt.Sprintf("%d", i) + "@gmail.com",
 			Role: store.Role{
 				Name: "user",
 			},
+			IsActive: true,
 		}
+
+		if err := user.Password.Set("pass123"); err != nil {
+			log.Fatal(err)
+		} 
+
+		users[i] = user
 	}
 
 	return users

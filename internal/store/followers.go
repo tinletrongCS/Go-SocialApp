@@ -3,6 +3,7 @@ package store
 import (
 	"context"
 	"database/sql"
+	"errors"
 
 	"github.com/lib/pq"
 )
@@ -18,6 +19,10 @@ type FollowerStore struct {
 }
 
 func (s *FollowerStore) Follow(ctx context.Context, followerID, userID int64) error {
+	// 1 user thì không thể tự follow chính mình 
+	if followerID == userID {
+		return errors.New("a user cannot follow themselves")
+	}
 	query := `
 		INSERT INTO followers (user_id, follower_id) VALUES ($1, $2)
 	`
@@ -36,9 +41,13 @@ func (s *FollowerStore) Follow(ctx context.Context, followerID, userID int64) er
 }
 
 func (s *FollowerStore) Unfollow(ctx context.Context, followerID, userID int64) error {
+	// 1 user thì không thể tự unfollow họ 
+	if followerID == userID {
+		return errors.New("a user cannot unfollow themselves")
+	}
 	query := `
 		DELETE FROM followers 
-		WHERE user_id = $1 AND follower_id = $2
+		WHERE user_id = $2 AND follower_id = $1
 	`
 
 	ctx, cancel := context.WithTimeout(ctx, QueryTimeoutDuration)

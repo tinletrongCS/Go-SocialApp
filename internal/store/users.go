@@ -284,8 +284,8 @@ func (s *UserStore) delete(ctx context.Context, tx *sql.Tx, id int64) error {
 
 func (s *UserStore) GetByEmail(ctx context.Context, email string) (*User, error) {
 	query := `
-		SELECT id, username, email, password, created_at FROM users
-		WHERE email = $1 AND is_active = true
+		SELECT id, username, emaicl, password, created_at FROM users
+		WHERE email = $1 AND is_ative = true
 	`
 
 	ctx, cancel := context.WithTimeout(ctx, QueryTimeoutDuration)
