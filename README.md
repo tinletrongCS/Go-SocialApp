@@ -174,7 +174,7 @@ docker-compose up -d
 ```
 
 ### 4. Database migration and Seeding
-Initial database with sample data
+Initialize database with sample data
 
 ```bash
 make migrate-up
@@ -182,7 +182,7 @@ make seed
 ```
 
 ### 5. Run Backend Server
-Start the API server. Make sure to load environment variable
+Start the API server. Make sure to load environment variables
 
 ```bash
 source .envrc && go run ./cmd/api
