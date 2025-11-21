@@ -12,7 +12,7 @@
 
 ## Introduction
 
-**Tho-ret-Ci-ty** is my first majored project simulating the core features of a social network (get ideas from Threads developed by Meta). The project is designed with a Layered Architecture, focusing on performmance, scalability and simplicity. It demonstrates modern Backend techniques such as Database Transactions, Caching, Rate Limiting, and Asynchronous Processing.
+**Tho-ret-Ci-ty** is my personal project simulating the core features of a social network (get ideas from Threads developed by Meta). The project is designed with a Layered Architecture, focusing on performmance, scalability and simplicity. It demonstrates modern Backend techniques such as Database Transactions, Caching, Rate Limiting, and Asynchronous Processing.
 
 ## Features
 
