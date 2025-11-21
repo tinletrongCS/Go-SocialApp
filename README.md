@@ -194,4 +194,4 @@ Start the React application in **web** directory
 ```bash
 npm run dev
 ```
-Server will running at:**http://localhost:5173**
+Server will running at: **http://localhost:5173**
