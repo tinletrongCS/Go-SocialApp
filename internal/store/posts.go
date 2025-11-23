@@ -39,9 +39,8 @@ func (s *PostStore) GetUserFeed(ctx context.Context, userID int64, fq PaginatedF
 		FROM posts p
 		LEFT JOIN comments c ON c.post_id = p.id
 		LEFT JOIN users u ON p.user_id = u.id
-		JOIN followers f ON f.follower_id = p.user_id OR p.user_id = $1
 		WHERE 
-			f.user_id = $1 AND
+			(p.user_id = $1 OR p.user_id IN (SELECT follower_id FROM followers WHERE user_id = $1)) AND
 			(p.title ILIKE '%' || $4 || '%' OR p.content ILIKE '%' || $4 || '%') AND
 			(p.tags @> $5 OR $5 = '{}')
 		GROUP BY p.id, u.username
@@ -196,4 +195,38 @@ func (s *PostStore) Update(ctx context.Context, post *Post) error {
 	}
 
 	return nil
+}
+
+func (s *PostStore) GetByUser(ctx context.Context, userID int64) ([]Post, error) {
+	query := `
+		SELECT p.title, p.content, p.created_at
+		FROM posts p
+		JOIN users ON p.user_id = users.id
+		WHERE p.user_id = $1
+		ORDER BY p.created_at DESC;
+	`
+
+	ctx, cancel := context.WithTimeout(ctx, QueryTimeoutDuration)
+	defer cancel()
+
+	rows, err := s.db.QueryContext(ctx, query, userID)
+	if err != nil {
+		return nil, err
+	}
+
+	var posts []Post
+	for rows.Next() {
+		var post Post
+		err := rows.Scan(
+			&post.Title,
+			&post.Content,
+			&post.CreatedAt,
+		)
+		if err != nil {
+			return nil, err
+		}
+		posts = append(posts, post)
+	}
+
+	return posts, nil
 }

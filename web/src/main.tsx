@@ -5,8 +5,9 @@ import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom'
 import { ConfirmationPage } from './ConfirmationPage';
 import { AuthPage } from './AuthPage';
 import { FeedPage } from './FeedPage';
+import { ProfilePage } from './ProfilePage';
 
-// Kiểm tra xem đã đăng nhập chưa để bảo vệ route
+// Component bảo vệ route: chỉ render nếu đã có token
 const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   const token = localStorage.getItem("token");
   if (!token) {
@@ -31,6 +32,14 @@ const router = createBrowserRouter([
   {
     path: "/confirm/:token",
     element: <ConfirmationPage />,
+  },
+  {
+    path: "/profile/:id",
+    element: (
+      <ProtectedRoute>
+        <ProfilePage />
+      </ProtectedRoute>
+    ),
   },
 ]);
 

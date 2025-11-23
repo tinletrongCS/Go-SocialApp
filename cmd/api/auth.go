@@ -163,7 +163,7 @@ func (app *application) createTokenHandler(w http.ResponseWriter, r *http.Reques
 		return
 	}
 
-	// Sau khi đăng nhập kí sẽ lấy token để đăng nhập 
+	// Sau khi đăng nhập kí sẽ lấy token để đăng nhập
 	if err := user.Password.Compare(payload.Password); err != nil {
 		app.unauthorizedErrorResponse(w, r, err)
 		return
@@ -184,7 +184,11 @@ func (app *application) createTokenHandler(w http.ResponseWriter, r *http.Reques
 		return
 	}
 
-	if err := app.jsonResponse(w, http.StatusCreated, token); err != nil {
+	response := map[string]any{
+		"token": token,
+		"id":    user.ID,
+	}
+	if err := app.jsonResponse(w, http.StatusCreated, response); err != nil {
 		app.internalServerError(w, r, err)
 	}
 }

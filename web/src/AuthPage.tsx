@@ -17,27 +17,31 @@ export const AuthPage = () => {
     try {
       if (isLogin) {
         // --- LUỒNG ĐĂNG NHẬP ---
-        // 1. Gọi API lấy Token
         const res = await fetcher("/authentication/token", {
           method: "POST",
           body: JSON.stringify({ email: formData.email, password: formData.password }),
         });
         
-        // 2. Lưu token vào LocalStorage (SỬA LẠI DÒNG NÀY)
-        // Backend trả về { data: "token..." } nên phải lấy .data
-        localStorage.setItem("token", res.data); 
-        
-        // 3. Chuyển hướng vào Feed
+        // --- CẬP NHẬT MỚI Ở ĐÂY ---
+        // Backend trả về: { data: { token: "...", id: 123 } }
+        if (res.data && res.data.token) {
+            localStorage.setItem("token", res.data.token);
+            localStorage.setItem("user_id", res.data.id); // Lưu thêm ID để dùng cho trang Profile
+            
+        } else {
+            // Fallback nếu backend chưa cập nhật (trường hợp res.data là chuỗi token cũ)
+            localStorage.setItem("token", res.data);
+            
+        }
         navigate("/");
+        
       } else {
         // --- LUỒNG ĐĂNG KÝ ---
-        // 1. Gọi API đăng ký
         await fetcher("/authentication/user", {
           method: "POST",
           body: JSON.stringify(formData),
         });
         
-        // 2. Thông báo thành công
         setMessage("Đăng ký thành công! Vui lòng kiểm tra Mailtrap để kích hoạt tài khoản.");
         setFormData({ username: "", email: "", password: "" });
       }
@@ -48,7 +52,7 @@ export const AuthPage = () => {
 
   return (
     <div className="container" style={{ marginTop: "100px", textAlign: "center" }}>
-      <h1 style={{ marginBottom: "30px" }}>Tho-ret-Ci-ty</h1>
+      <h1 style={{ marginBottom: "30px" }}>🐢 Tho-ret-Ci-ty 🏢🏢🏬🏬</h1>
       
       {message && <div style={{ color: "green", marginBottom: "10px" }}>{message}</div>}
       {error && <div style={{ color: "#ff3040", marginBottom: "10px" }}>{error}</div>}

@@ -244,3 +244,22 @@ func (app *application) searchUserHandler(w http.ResponseWriter, r *http.Request
 		app.internalServerError(w, r, err)
 	}
 }
+
+func (app *application) getUserPostsHandler (w http.ResponseWriter, r *http.Request) {
+	userID, err := strconv.ParseInt(chi.URLParam(r, "userID"), 10, 64)
+	if err != nil {
+		app.badRequestResponse(w, r, err)
+		return
+	}
+
+	posts, err := app.store.Posts.GetByUser(r.Context(), userID)
+	if err != nil {
+		app.internalServerError(w,r, err)
+		return
+	}
+
+	if err := app.jsonResponse(w, http.StatusOK, posts); err != nil {
+		app.internalServerError(w, r, err)
+	}
+
+}

@@ -152,6 +152,8 @@ func (app *application) mount() http.Handler {
 				r.Put("/unfollow", app.unfollowUserHandler)
 				r.Get("/followers", app.getUserFollowersHandler)
 				r.Get("/followings", app.getUserFollowingHandler)
+
+				r.Get("/posts", app.getUserPostsHandler)
 			})
 
 			r.Group(func(r chi.Router) {
